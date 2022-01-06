@@ -94,7 +94,7 @@ export default function SignUpPage() {
           onChange={handleInputChange}
           name="image"
         />
-        {isWaiting ? <Button><Loader type="ThreeDots" color="#FFFFFf" height={80} width={80}></Loader></Button> : <Button disabled={isWaiting} type="submit">Cadastrar</Button> }
+        {isWaiting ? <Button><Loader type="ThreeDots" color="#FFFFFf" height={45} width={60}></Loader></Button> : <Button disabled={isWaiting} type="submit">Cadastrar</Button> }
         
       </Form>
       <Link to="/">

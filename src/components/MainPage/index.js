@@ -1,20 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import logo from "../../assets/logo.png";
 import styled from "styled-components";
 import { useState } from "react";
 import {Link, useNavigate} from "react-router-dom"
 import axios from "axios";
 import Loader from "react-loader-spinner";
+import UserContext from "../contexts/UserContext";
 
-function handleLogin(event) {
-  event.preventDefault();
-}
 
 export default function MainPage() {
   const [isWaiting , setIsWaiting] = useState(false)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const {setInfoUser} = useContext(UserContext)
+
+
   
   function handleLogin(event) {
 
@@ -29,14 +30,13 @@ export default function MainPage() {
   objectLogin
 );
     promise.then(response => {
-
-        console.log(response)
+        setInfoUser(response.data)
         setIsWaiting(false)
         navigate("/today")
         
     }
     )
-    promise.catch(error => {console.log(error.response)
+    promise.catch(error => {
         setIsWaiting(false)
         alert("Login não concluido, tente novamente")
     
@@ -67,7 +67,7 @@ export default function MainPage() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        {isWaiting ? <Button><Loader type="ThreeDots" color="#FFFFFf" height={80} width={80}></Loader></Button> : <Button disabled={isWaiting} type="submit">Entrar</Button> }
+        {isWaiting ? <Button><Loader type="ThreeDots" color="#FFFFFf" height={45} width={60}></Loader></Button> : <Button disabled={isWaiting} type="submit">Entrar</Button> }
       </Form>
       <Link to="/signup">
         <PLink>Não tem uma conta? Cadastre-se!</PLink>
