@@ -1,4 +1,4 @@
-  {
+{
   "name": "projeto_010_trackit_aka_projetao",
   "version": "0.1.0",
   "private": true,
@@ -8,10 +8,12 @@
     "react": "^17.0.2",
     "react-circular-progressbar": "^2.0.4",
     "react-dom": "^17.0.2",
+    "react-formal": "^2.3.0",
     "react-loader-spinner": "^4.0.0",
     "react-router-dom": "^6.2.1",
     "react-scripts": "^4.0.3",
-    "styled-components": "^5.3.3"
+    "styled-components": "^5.3.3",
+    "yup": "^0.32.11"
   },
   "scripts": {
     "start": "react-scripts start",
