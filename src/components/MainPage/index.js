@@ -94,6 +94,11 @@ const Input = styled.input`
   height: 45px;
   width: 90%;
   border-radius: 5px;
+  color: #dbdbdb;
+  font-family: Lexend Deca;
+  font-size: 20px;
+  text-align: left;
+  padding-left: 10px;
 
   ::placeholder {
     color: #dbdbdb;

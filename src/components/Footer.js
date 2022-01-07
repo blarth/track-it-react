@@ -50,6 +50,7 @@ const Container = styled.div`
   background-color: #ffffff;
   padding-left: 36px;
   padding-right: 36px;
+  z-index: 2;
 `;
 const Paragraph = styled.p`
   height: 22px;

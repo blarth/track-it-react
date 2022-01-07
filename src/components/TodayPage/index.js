@@ -46,7 +46,6 @@ export default function TodayPage() {
 const Container = styled.div`
     background-color: #E5E5E5;
     width: 100%;
-    height: 597px;
     display:flex;
     flex-direction: column;
     align-items: center;

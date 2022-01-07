@@ -19,7 +19,6 @@ export default function RecordPage() {
 const Container = styled.div`
     background-color: #E5E5E5;
     width: 100%;
-    min-height: 597px;
     display:flex;
     flex-direction: column;
     align-items: center;

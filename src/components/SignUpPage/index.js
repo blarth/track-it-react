@@ -46,7 +46,7 @@ export default function SignUpPage() {
       
 
     function handleInputChange(e) {
-        setFormData({ ...formData, [e.target.name]: e.target.value })
+        setFormData({ ...formData, [e.target.name] : e.target.value })
       }
     
 
@@ -125,12 +125,18 @@ const Input = styled.input`
   width: 90%;
   border-radius: 5px;
   background-color: ${(props) => props.isWaiting ? "#F2F2F2" : "#ffffff"};
+  color: #dbdbdb;
+  font-family: Lexend Deca;
+  font-size: 20px;
+  text-align: left;
+  padding-left: 10px;
   ::placeholder {
     color: #dbdbdb;
     font-family: Lexend Deca;
     font-size: 20px;
     text-align: left;
   }
+  
 
 `;
 const Button = styled.button`

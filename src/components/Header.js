@@ -33,7 +33,7 @@ box-shadow: 0px 4px 4px 0px #00000026;
 position: fixed;
 top:0px;
 left: 0;
-
+z-index: 2;
 
 `;
 const ContainerAvatar = styled.div`
