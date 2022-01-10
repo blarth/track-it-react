@@ -25,9 +25,15 @@ export default function TodayHabit({
       <ContainerParagraph>
         <Paragraph>{name}</Paragraph>
         <InfoHabit done={done}>
-          Sequencia atual: {currentSequence} dias <br /> Seu record:{" "}
-          {highestSequence} dias{" "}
+          Sequencia atual: {currentSequence} dias
         </InfoHabit>
+        <InfoHabitRecord
+          done={done}
+          currentSequence={currentSequence}
+          highestSequence={highestSequence}
+        >
+          Seu record: {highestSequence} dias{" "}
+        </InfoHabitRecord>
       </ContainerParagraph>
       {!done ? (
         <Button
@@ -54,7 +60,7 @@ export default function TodayHabit({
               {},
               config
             );
-            promisse.then((response) => console.log(response));
+            promisse.then(handleHabitProgress);
             promisse.catch((error) => console.log(error.response));
           }}
         >
@@ -93,7 +99,7 @@ margin-left: 15px;
 `;
 
 const InfoHabit = styled.p`
-  height: 32px;
+  height: 16px;
   width: 156px;
   border-radius: nullpx;
   font-family: Lexend Deca;
@@ -104,6 +110,21 @@ const InfoHabit = styled.p`
   letter-spacing: 0em;
   text-align: left;
   color: ${(props) => (props.done ? "#8FC549" : "#666666")};
+  margin-left: 15px;
+`;
+const InfoHabitRecord = styled.p`
+  height: 16px;
+  width: 156px;
+  border-radius: nullpx;
+  font-family: Lexend Deca;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: ${(props) =>
+    props.highestSequence === props.currentSequence ? "#8FC549" : "#666666"};
   margin-left: 15px;
 `;
 

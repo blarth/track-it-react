@@ -4,11 +4,15 @@ import { useState, useContext, useEffect } from "react";
 import UserContext from "../../contexts/UserContext";
 import Loader from "react-loader-spinner";
 
-export default function NewHabit({ setFormsCount , isSelectedDay, setIsSelectedDay }) {
+export default function NewHabit({
+  setFormsCount,
+  isSelectedDay,
+  setIsSelectedDay,
+}) {
   const { infoUser } = useContext(UserContext);
   const [isWaiting, setIsWaiting] = useState(false);
-  const [isSelected, setIsSelected] = useState(false)
-  
+  const [isSelected, setIsSelected] = useState(false);
+
   const daysWeek = [
     { name: "D", id: 0 },
     { name: "S", id: 1 },
@@ -29,7 +33,6 @@ export default function NewHabit({ setFormsCount , isSelectedDay, setIsSelectedD
   };
 
   function handleNewHabit(event) {
-    
     event.preventDefault();
     setIsWaiting(true);
 
@@ -48,17 +51,16 @@ export default function NewHabit({ setFormsCount , isSelectedDay, setIsSelectedD
       alert("Cadastro de hábito não concluido, tente novamente");
     });
   }
-  
-function handleSelectedDay(id, isSelectedDay, setIsSelectedDay ){
-  const newArray = isSelectedDay.map((day) => {
-    if (id === day.id ) {
-      isSelectedDay.isSelected = !isSelectedDay.isSelected;
-    } 
-    return day;
-  });
-  setIsSelectedDay(newArray);
-}
 
+  function handleSelectedDay(id, isSelectedDay, setIsSelectedDay) {
+    const newArray = isSelectedDay.map((day) => {
+      if (id === day.id) {
+        isSelectedDay.isSelected = !isSelectedDay.isSelected;
+      }
+      return day;
+    });
+    setIsSelectedDay(newArray);
+  }
 
   return (
     <Container>
@@ -86,8 +88,7 @@ function handleSelectedDay(id, isSelectedDay, setIsSelectedDay ){
                 isWaiting={isWaiting}
                 isSelected={isSelected}
                 onClick={(e) => {
-                  handleSelectedDay(e.target)
-                  
+                  handleSelectedDay(e.target);
                 }}
                 name="days"
               >
@@ -137,7 +138,6 @@ function handleSelectedDay(id, isSelectedDay, setIsSelectedDay ){
     </Container>
   );
 }
-
 
 const Container = styled.div`
   min-height: 180px;

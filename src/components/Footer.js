@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import UserContext from "./contexts/UserContext";
 
 export default function Footer() {
-  const {habitProgress} =  useContext(UserContext)
+  const { habitProgress } = useContext(UserContext);
 
   return (
     <Container>

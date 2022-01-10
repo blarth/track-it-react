@@ -9,9 +9,8 @@ import NewHabit from "./NewHabit";
 
 export default function HabitsPage() {
   const [habits, setHabits] = useState(null);
-  const [formsCount , setFormsCount] = useState(false)
-  const [isSelectedDay, setIsSelectedDay] = useState([])
-
+  const [formsCount, setFormsCount] = useState(false);
+  const [isSelectedDay, setIsSelectedDay] = useState([]);
 
   const { infoUser } = useContext(UserContext);
   const config = {
@@ -26,17 +25,17 @@ export default function HabitsPage() {
       config
     );
     promisse.then((response) => {
-      setHabits(response.data)
-    setIsSelectedDay(response.data.map((habit) => ({ ...habit, isSelectedDay: false })))});
-
+      setHabits(response.data);
+      setIsSelectedDay(
+        response.data.map((habit) => ({ ...habit, isSelectedDay: false }))
+      );
+    });
 
     promisse.catch((error) => console.log(error.response));
   }, [habits]);
 
-
-
   function handleNewHabit() {
-    setFormsCount(true)
+    setFormsCount(true);
   }
 
   return (
@@ -49,7 +48,13 @@ export default function HabitsPage() {
             <Plus>+</Plus>
           </Button>
         </ContainerAddHabits>
-        {formsCount === true && <NewHabit setFormsCount={setFormsCount} isSelectedDay={isSelectedDay} setIsSelectedDay={setIsSelectedDay}/> }
+        {formsCount === true && (
+          <NewHabit
+            setFormsCount={setFormsCount}
+            isSelectedDay={isSelectedDay}
+            setIsSelectedDay={setIsSelectedDay}
+          />
+        )}
         {habits === null ? (
           <Paragraph>
             Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para

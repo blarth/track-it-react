@@ -1,4 +1,4 @@
-import  { useContext, useEffect , useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Header from "../Header";
 import Footer from "../Footer";
 import styled from "styled-components";
@@ -8,9 +8,9 @@ import UserContext from "../contexts/UserContext";
 import TodayHabit from "./TodayHabit";
 
 export default function TodayPage() {
-  const { infoUser , habitProgress, setHabitProgress } = useContext(UserContext);
-  
-  const [todayHabits, setTodayHabits] = useState(null)
+  const { infoUser, habitProgress, setHabitProgress } = useContext(UserContext);
+
+  const [todayHabits, setTodayHabits] = useState(null);
 
   const config = {
     headers: {
@@ -18,22 +18,16 @@ export default function TodayPage() {
     },
   };
 
-  
-function handleHabitProgress(){
-  let numHabitsDone = todayHabits.filter( (habit) => {
-    if(habit.done === true){
-      return habit.id
-    }
+  function handleHabitProgress() {
+    let numHabitsDone = todayHabits.filter((habit) => {
+      if (habit.done === true) {
+        return habit.id;
+      }
+    });
+
+    console.log(numHabitsDone);
+    setHabitProgress(numHabitsDone.length / todayHabits.length);
   }
-  )
-
-  console.log(numHabitsDone)
-  setHabitProgress(  numHabitsDone.length  / todayHabits.length)
-
-
-}
-
-
 
   useEffect(() => {
     const promisse = axios.get(
@@ -41,9 +35,8 @@ function handleHabitProgress(){
       config
     );
     promisse.then((response) => {
-      setTodayHabits(response.data)
-      
-    })
+      setTodayHabits(response.data);
+    });
     promisse.catch((error) => console.log(error.response));
   }, [todayHabits]);
 
@@ -54,18 +47,28 @@ function handleHabitProgress(){
       <Header />
       <Container>
         <Title>{dia}</Title>
-        
-        {habitProgress === 0 ? <Paragraph>Nenhum hábito concluído ainda</Paragraph> : <Paragraph>{habitProgress}% dos habitos concluidos</Paragraph> }
-        { todayHabits === null ? <h1>Carregando..</h1>
-        : todayHabits.map((habit , i) => <TodayHabit  key={i} {...habit} handleHabitProgress={handleHabitProgress} />
-        )
-        }
+
+        {habitProgress === 0 ? (
+          <Paragraph>Nenhum hábito concluído ainda</Paragraph>
+        ) : (
+          <Paragraph>{habitProgress}% dos habitos concluidos</Paragraph>
+        )}
+        {todayHabits === null ? (
+          <h1>Carregando..</h1>
+        ) : (
+          todayHabits.map((habit, i) => (
+            <TodayHabit
+              key={i}
+              {...habit}
+              handleHabitProgress={handleHabitProgress}
+            />
+          ))
+        )}
       </Container>
       <Footer />
     </>
   );
 }
-
 
 const Container = styled.div`
   background-color: #e5e5e5;
@@ -75,7 +78,6 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 70px;
-
 `;
 
 const Title = styled.p`
@@ -99,4 +101,3 @@ const Paragraph = styled.p`
   padding-right: 60px;
   margin-bottom: 25px;
 `;
-

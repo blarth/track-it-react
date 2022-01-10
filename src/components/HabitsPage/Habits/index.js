@@ -1,16 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import trash from "../../../assets/Group.png";
-import { useContext} from "react";
-import Swal from 'sweetalert2'
+import { useContext } from "react";
+import Swal from "sweetalert2";
 import axios from "axios";
 import UserContext from "../../contexts/UserContext";
 
-
 export default function Habits({ id, name, days }) {
-
   const { infoUser } = useContext(UserContext);
-    
+
   const daysWeek = [
     { name: "D", id: 0 },
     { name: "S", id: 1 },
@@ -21,42 +19,49 @@ export default function Habits({ id, name, days }) {
     { name: "S", id: 6 },
   ];
 
-  function handleDelete(){
-  
+  function handleDelete() {
     Swal.fire({
-      title: 'Você tem certeza?',
+      title: "Você tem certeza?",
       text: "Se deletar este hábito, não poderá voltar atrás!",
-      icon: 'warning',
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Sim! Apague meu hábito por favor!'
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sim! Apague meu hábito por favor!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`, {
-        headers: {
-          Authorization: `Bearer ${infoUser.token} `,
-        },
-        data: {
-          id : id
-        },
-      });
+        axios.delete(
+          `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${infoUser.token} `,
+            },
+            data: {
+              id: id,
+            },
+          }
+        );
       }
-    })
-}  
-
- 
+    });
+  }
 
   return (
     <>
       <Container>
-        <TrashIcon onClick={handleDelete} src={trash} alt="erro trash"></TrashIcon>
+        <TrashIcon
+          onClick={handleDelete}
+          src={trash}
+          alt="erro trash"
+        ></TrashIcon>
         <Paragraph>{name}</Paragraph>
         <ContainerWeekDays>
-          {daysWeek.map((day , i) => {
-            
+          {daysWeek.map((day, i) => {
             return (
-              <ContainerDay  key={i} id={day.id} isHabitDay={days.includes(day.id) ? true : false} >
+              <ContainerDay
+                key={i}
+                id={day.id}
+                isHabitDay={days.includes(day.id) ? true : false}
+              >
                 <p>{day.name}</p>
               </ContainerDay>
             );
@@ -122,7 +127,7 @@ const ContainerDay = styled.div`
 
   &:first-child {
     margin-left: 15px;
-  } 
+  }
 `;
 
 const ContainerWeekDays = styled.div`

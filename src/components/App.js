@@ -9,11 +9,12 @@ import RecordPage from "./RecordPage";
 
 export default function App() {
   const [infoUser, setInfoUser] = useState({});
-  const [habitProgress, setHabitProgress] = useState(0)
+  const [habitProgress, setHabitProgress] = useState(0);
 
   return (
-    <UserContext.Provider value={{ infoUser, setInfoUser , habitProgress, setHabitProgress}}>
-      
+    <UserContext.Provider
+      value={{ infoUser, setInfoUser, habitProgress, setHabitProgress }}
+    >
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainPage />} />
@@ -23,7 +24,6 @@ export default function App() {
           <Route path="/record" element={<RecordPage />} />
         </Routes>
       </BrowserRouter>
-
     </UserContext.Provider>
   );
 }
