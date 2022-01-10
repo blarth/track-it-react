@@ -2,58 +2,52 @@ import React from "react";
 import logo from "../../assets/logo.png";
 import styled from "styled-components";
 import { useState } from "react";
-import {Link , useNavigate} from "react-router-dom"
-import axios from "axios"
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import Loader from "react-loader-spinner";
 
-
-
-
 export default function SignUpPage() {
-    const [isWaiting , setIsWaiting] = useState(false)
-    const navigate = useNavigate();
+  const [isWaiting, setIsWaiting] = useState(false);
+  const navigate = useNavigate();
 
-    const [formData, setFormData] = useState({
-        email: '',
-        name: '',
-        image: '',
-        password: ''
-      });
+  const [formData, setFormData] = useState({
+    email: "",
+    name: "",
+    image: "",
+    password: "",
+  });
 
-    function handleLogin(event) {
+  function handleLogin(event) {
+    event.preventDefault();
+    setIsWaiting(true);
 
-        event.preventDefault();
-        setIsWaiting(true)
-
-
-        const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up', 
+    const promise = axios.post(
+      "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up",
       formData
     );
-        promise.then(response => {
-
-            
-            setIsWaiting(false)
-            navigate("/")
-            
-        }
-        )
-        promise.catch(error => {console.log(error.response)
-            setIsWaiting(false)
-            alert("Cadastro não concluido, tente novamente")
-        
-        });
+    promise.then((response) => {
+      setIsWaiting(false);
+      navigate("/");
+    });
+    promise.catch((error) => {
+      console.log(error.response);
+      setIsWaiting(false);
+      alert("Cadastro não concluido, tente novamente");
+    });
   }
-      
 
-    function handleInputChange(e) {
-        setFormData({ ...formData, [e.target.name] : e.target.value })
-      }
-    
+  function handleInputChange(e) {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  }
 
   return (
     <Container>
       <Image src={logo} alt="imagem logo"></Image>
-      <Form onSubmit={handleLogin} isWaiting={isWaiting} setIsWaiting={setIsWaiting} >
+      <Form
+        onSubmit={handleLogin}
+        isWaiting={isWaiting}
+        setIsWaiting={setIsWaiting}
+      >
         <Input
           disabled={isWaiting}
           isWaiting={isWaiting}
@@ -85,8 +79,8 @@ export default function SignUpPage() {
           name="name"
         />
         <Input
-        isWaiting={isWaiting}
-        disabled={isWaiting}
+          isWaiting={isWaiting}
+          disabled={isWaiting}
           type="url"
           required
           placeholder="foto"
@@ -94,8 +88,20 @@ export default function SignUpPage() {
           onChange={handleInputChange}
           name="image"
         />
-        {isWaiting ? <Button><Loader type="ThreeDots" color="#FFFFFf" height={45} width={60}></Loader></Button> : <Button disabled={isWaiting} type="submit">Cadastrar</Button> }
-        
+        {isWaiting ? (
+          <Button>
+            <Loader
+              type="ThreeDots"
+              color="#FFFFFf"
+              height={45}
+              width={60}
+            ></Loader>
+          </Button>
+        ) : (
+          <Button disabled={isWaiting} type="submit">
+            Cadastrar
+          </Button>
+        )}
       </Form>
       <Link to="/">
         <PLink>Já tem uma conta? Faça login!</PLink>
@@ -103,8 +109,6 @@ export default function SignUpPage() {
     </Container>
   );
 }
-
-
 
 const Container = styled.main`
   width: 100%;
@@ -124,7 +128,7 @@ const Input = styled.input`
   height: 45px;
   width: 90%;
   border-radius: 5px;
-  background-color: ${(props) => props.isWaiting ? "#F2F2F2" : "#ffffff"};
+  background-color: ${(props) => (props.isWaiting ? "#F2F2F2" : "#ffffff")};
   color: #dbdbdb;
   font-family: Lexend Deca;
   font-size: 20px;
@@ -136,41 +140,34 @@ const Input = styled.input`
     font-size: 20px;
     text-align: left;
   }
-  
-
 `;
 const Button = styled.button`
-
-height: 45px;
-width: 90%;
-border-radius: 4.6px;
-background: #52B6FF;
-color:#FFFFFF;
-font-size: 21px;
-border: none;
-
+  height: 45px;
+  width: 90%;
+  border-radius: 4.6px;
+  background: #52b6ff;
+  color: #ffffff;
+  font-size: 21px;
+  border: none;
 `;
 
 const Form = styled.form`
-display: flex;
-flex-direction: column;
-width: 100%;
-gap: 6px;
-align-items:center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 6px;
+  align-items: center;
 `;
 
 const PLink = styled.p`
-
-height: 17px;
-width: content;
-font-family: Lexend Deca;
-font-size: 14px;
-text-align: center;
-text-decoration-line: underline;
-color: #52B6FF;
-margin-top: 25px;
-
-
+  height: 17px;
+  width: content;
+  font-family: Lexend Deca;
+  font-size: 14px;
+  text-align: center;
+  text-decoration-line: underline;
+  color: #52b6ff;
+  margin-top: 25px;
 `;
 
 /* 

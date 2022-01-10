@@ -9,19 +9,21 @@ import RecordPage from "./RecordPage";
 
 export default function App() {
   const [infoUser, setInfoUser] = useState({});
+  const [habitProgress, setHabitProgress] = useState(0)
 
   return (
-
-    <UserContext.Provider value={{ infoUser, setInfoUser}}>
+    <UserContext.Provider value={{ infoUser, setInfoUser , habitProgress, setHabitProgress}}>
+      
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/signup" element={<SignUpPage />} />
-          <Route path="/today" element={<TodayPage />}/>
+          <Route path="/today" element={<TodayPage />} />
           <Route path="/habits" element={<HabitsPage />} />
           <Route path="/record" element={<RecordPage />} />
         </Routes>
       </BrowserRouter>
+
     </UserContext.Provider>
   );
 }

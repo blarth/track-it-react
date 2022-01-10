@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import { Link } from "react-router-dom";
+import UserContext from "./contexts/UserContext";
 
 export default function Footer() {
-  const porcentage = 0;
+  const {habitProgress} =  useContext(UserContext)
 
   return (
     <Container>
@@ -12,24 +13,22 @@ export default function Footer() {
         <Paragraph>Hábitos</Paragraph>
       </Link>
       <Link to="/today">
-        <ContainerProgressBar>
+        <Circle>
           <CircularProgressbar
-            value={porcentage}
+            value={habitProgress}
             text={"Hoje"}
             background
+            minValue={0}
             backgroundPadding={6}
             styles={buildStyles({
               backgroundColor: "#52B6FF",
               textColor: "#fff",
-              textSize: "18px",
-              textMargin: "10px",
               pathColor: "#fff",
               trailColor: "transparent",
               textFamily: "Lexend Deca",
             })}
           />
-          ;
-        </ContainerProgressBar>
+        </Circle>
       </Link>
       <Link to="/record">
         <Paragraph>Histórico</Paragraph>
@@ -61,8 +60,8 @@ const Paragraph = styled.p`
   color: #52b6ff;
 `;
 
-const ContainerProgressBar = styled.div`
+const Circle = styled.div`
   height: 91px;
   width: 91px;
-  margin-bottom: 30px;
+  margin-bottom: 35px;
 `;
