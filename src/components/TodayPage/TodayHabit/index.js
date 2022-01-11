@@ -10,9 +10,9 @@ export default function TodayHabit({
   done,
   currentSequence,
   highestSequence,
-  handleHabitProgress,
+  getTodayHabits,
 }) {
-  const { infoUser } = useContext(UserContext);
+  const { infoUser, habitProgress } = useContext(UserContext);
 
   const config = {
     headers: {
@@ -23,7 +23,7 @@ export default function TodayHabit({
   return (
     <Container>
       <ContainerParagraph>
-        <Paragraph>{name}</Paragraph>
+        <Paragraph >{name}</Paragraph>
         <InfoHabit done={done}>
           Sequencia atual: {currentSequence} dias
         </InfoHabit>
@@ -44,7 +44,7 @@ export default function TodayHabit({
               {},
               config
             );
-            promisse.then(handleHabitProgress);
+            promisse.then(getTodayHabits)
             promisse.catch((error) => console.log(error.response));
           }}
         >
@@ -60,7 +60,7 @@ export default function TodayHabit({
               {},
               config
             );
-            promisse.then(handleHabitProgress);
+            promisse.then(getTodayHabits);
             promisse.catch((error) => console.log(error.response));
           }}
         >
@@ -124,7 +124,7 @@ const InfoHabitRecord = styled.p`
   letter-spacing: 0em;
   text-align: left;
   color: ${(props) =>
-    props.highestSequence === props.currentSequence ? "#8FC549" : "#666666"};
+    props.highestSequence === props.currentSequence && props.highestSequence > 0 ? "#8FC549" : "#666666"};
   margin-left: 15px;
 `;
 

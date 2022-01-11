@@ -25,7 +25,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
   margin-top: 70px;
 `;
 
@@ -36,7 +35,7 @@ const Title = styled.p`
   font-size: 23px;
   text-align: left;
   color: #126ba5;
-  padding-right: 230px;
+  padding-right: 235px;
   margin-top: 25px;
 `;
 
@@ -50,5 +49,5 @@ const Paragraph = styled.p`
   padding-left: 10px;
   margin-bottom: 25px;
   margin-top: 15px;
-  padding-right: 10px;
+  padding-left: 20px;
 `;

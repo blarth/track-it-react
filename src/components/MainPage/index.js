@@ -144,9 +144,3 @@ const PLink = styled.p`
   color: #52b6ff;
   margin-top: 25px;
 `;
-
-/* 
-const requisicao = axios.post("https://minha-api.com/login", {
-			email: email,
-			senha: senha
-		}); */

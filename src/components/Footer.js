@@ -14,20 +14,22 @@ export default function Footer() {
       </Link>
       <Link to="/today">
         <Circle>
-          <CircularProgressbar
-            value={habitProgress}
-            text={"Hoje"}
-            background
-            minValue={0}
-            backgroundPadding={6}
-            styles={buildStyles({
-              backgroundColor: "#52B6FF",
-              textColor: "#fff",
-              pathColor: "#fff",
-              trailColor: "transparent",
-              textFamily: "Lexend Deca",
-            })}
-          />
+          {
+            <CircularProgressbar
+              value={isNaN(habitProgress) ? 0 : habitProgress * 100}
+              text={"Hoje"}
+              background
+              minValue={0}
+              backgroundPadding={6}
+              styles={buildStyles({
+                backgroundColor: "#52B6FF",
+                textColor: "#fff",
+                pathColor: "#fff",
+                trailColor: "transparent",
+                textFamily: "Lexend Deca",
+              })}
+            />
+          }
         </Circle>
       </Link>
       <Link to="/record">
@@ -56,7 +58,6 @@ const Paragraph = styled.p`
   width: 68px;
   font-family: Lexend Deca;
   font-size: 18px;
-  text-align: center;
   color: #52b6ff;
 `;
 

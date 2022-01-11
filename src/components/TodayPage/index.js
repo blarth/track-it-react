@@ -3,9 +3,11 @@ import Header from "../Header";
 import Footer from "../Footer";
 import styled from "styled-components";
 import dayjs from "dayjs";
+import "dayjs/locale/pt"
 import axios from "axios";
 import UserContext from "../contexts/UserContext";
 import TodayHabit from "./TodayHabit";
+import { number } from "yup";
 
 export default function TodayPage() {
   const { infoUser, habitProgress, setHabitProgress } = useContext(UserContext);
@@ -19,17 +21,11 @@ export default function TodayPage() {
   };
 
   function handleHabitProgress() {
-    let numHabitsDone = todayHabits.filter((habit) => {
-      if (habit.done === true) {
-        return habit.id;
-      }
-    });
 
-    console.log(numHabitsDone);
-    setHabitProgress(numHabitsDone.length / todayHabits.length);
+    let numHabitsDone = todayHabits?.filter(habit => habit.done === true)
+    setHabitProgress(numHabitsDone?.length / todayHabits?.length);
   }
-
-  useEffect(() => {
+  function getTodayHabits(){
     const promisse = axios.get(
       "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today",
       config
@@ -38,9 +34,19 @@ export default function TodayPage() {
       setTodayHabits(response.data);
     });
     promisse.catch((error) => console.log(error.response));
-  }, [todayHabits]);
 
-  const dia = dayjs().format("dddd, DD/MM");
+  }
+  
+  useEffect(() => {
+    getTodayHabits()
+  }, []);
+
+  const dia = dayjs().locale("pt").format("dddd, DD/MM").replace("-feira" , "");
+
+  useEffect(() => {
+    handleHabitProgress()
+  }, [todayHabits])
+
 
   return (
     <>
@@ -48,10 +54,10 @@ export default function TodayPage() {
       <Container>
         <Title>{dia}</Title>
 
-        {habitProgress === 0 ? (
+        {isNaN(habitProgress) ? (
           <Paragraph>Nenhum hábito concluído ainda</Paragraph>
         ) : (
-          <Paragraph>{habitProgress}% dos habitos concluidos</Paragraph>
+          <Paragraph habitProgress={habitProgress}>{(habitProgress*100).toFixed(2)}% dos habitos concluidos</Paragraph>
         )}
         {todayHabits === null ? (
           <h1>Carregando..</h1>
@@ -60,7 +66,7 @@ export default function TodayPage() {
             <TodayHabit
               key={i}
               {...habit}
-              handleHabitProgress={handleHabitProgress}
+              getTodayHabits={getTodayHabits}
             />
           ))
         )}
@@ -97,7 +103,7 @@ const Paragraph = styled.p`
   font-family: Lexend Deca;
   font-size: 18px;
   text-align: left;
-  color: #bababa;
+  color: ${(props) => (!props.habitProgress ? "#bababa" : "#8FC549")};
   padding-right: 60px;
   margin-bottom: 25px;
 `;

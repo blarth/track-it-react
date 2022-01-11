@@ -8,6 +8,7 @@ export default function NewHabit({
   setFormsCount,
   isSelectedDay,
   setIsSelectedDay,
+  getHabits
 }) {
   const { infoUser } = useContext(UserContext);
   const [isWaiting, setIsWaiting] = useState(false);
@@ -24,7 +25,7 @@ export default function NewHabit({
   ];
   const [formNewHabit, setFormsNewHabit] = useState({
     name: "",
-    days: [],
+    days: []
   });
   const config = {
     headers: {
@@ -35,13 +36,16 @@ export default function NewHabit({
   function handleNewHabit(event) {
     event.preventDefault();
     setIsWaiting(true);
+    if(formNewHabit.days.length === 0) return
 
+    
     const promise = axios.post(
       "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits",
       formNewHabit,
       config
     );
     promise.then((response) => {
+      getHabits();
       setIsWaiting(false);
       setFormsCount(false);
     });
@@ -52,14 +56,18 @@ export default function NewHabit({
     });
   }
 
-  function handleSelectedDay(id, isSelectedDay, setIsSelectedDay) {
-    const newArray = isSelectedDay.map((day) => {
-      if (id === day.id) {
-        isSelectedDay.isSelected = !isSelectedDay.isSelected;
-      }
-      return day;
-    });
-    setIsSelectedDay(newArray);
+ 
+  function handleSelectedDay(id) {
+
+    if(formNewHabit.days.includes(id)){
+      const newArray = formNewHabit.days.filter(day => day !== id )
+      setFormsNewHabit({...formNewHabit, days : newArray  })
+      
+    }else{
+      const newArray = [...formNewHabit.days, id]
+      setFormsNewHabit({...formNewHabit, days : newArray  })
+    }
+    
   }
 
   return (
@@ -82,17 +90,16 @@ export default function NewHabit({
           {daysWeek.map((day, i) => {
             return (
               <ContainerDay
-                key={i}
-                id={day.id}
-                disabled={isWaiting}
-                isWaiting={isWaiting}
-                isSelected={isSelected}
-                onClick={(e) => {
-                  handleSelectedDay(e.target);
-                }}
-                name="days"
+              key={i}
+              onClick={() => {
+                handleSelectedDay(day.id)
+              }}
+              isSelected={formNewHabit.days.includes(day.id) ? true : false}
               >
-                {day.name}
+                <p>
+
+                  {day.name}
+                </p>
               </ContainerDay>
             );
           })}
@@ -179,7 +186,8 @@ const Input = styled.input`
   width: 90%;
   border-radius: 5px;
   background-color: ${(props) => (props.isWaiting ? "#F2F2F2" : "#ffffff")};
-  color: #dbdbdb;
+  color: #666666;
+;
   font-family: Lexend Deca;
   font-size: 20px;
   text-align: left;

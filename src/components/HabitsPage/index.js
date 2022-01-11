@@ -20,6 +20,9 @@ export default function HabitsPage() {
   };
 
   useEffect(() => {
+    getHabits()
+  }, []);
+  function getHabits() {
     const promisse = axios.get(
       "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits",
       config
@@ -32,10 +35,10 @@ export default function HabitsPage() {
     });
 
     promisse.catch((error) => console.log(error.response));
-  }, [habits]);
-
+  }
   function handleNewHabit() {
     setFormsCount(true);
+    
   }
 
   return (
@@ -53,15 +56,16 @@ export default function HabitsPage() {
             setFormsCount={setFormsCount}
             isSelectedDay={isSelectedDay}
             setIsSelectedDay={setIsSelectedDay}
+            getHabits={getHabits}
           />
         )}
-        {habits === null ? (
+        {habits?.length === 0 || habits === null ? (
           <Paragraph>
             Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para
             começar a trackear!
           </Paragraph>
         ) : (
-          habits.map((habit) => <Habits {...habit} />)
+          habits.map((habit, i) => <Habits {...habit} key={i} />)
         )}
       </Container>
       <Footer />
