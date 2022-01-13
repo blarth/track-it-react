@@ -10,8 +10,11 @@ trackit-app-react.vercel.app
 ## Technologies
 
 React
+
 Styled-components
+
 Navigation (Router)
+
 Axios
 
 ## Development mode
