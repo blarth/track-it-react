@@ -2,7 +2,7 @@
 
 An easy habit tracker app, to help you enhance your discipline and achieve your personal goals.
 
-<img src="./src/assets/preview.png" alt="err">
+<img src="blarth/track_it_react/src/assets/preview.png" alt="err">
 
 trackit-app-react.vercel.app
 
@@ -17,7 +17,7 @@ Below you can find this amazing freatures:
  <li>Track your habits Page</li>
  <li>Today habits Page!</li>
  <li>Daily progress with circular progress bar!<li/>
-</u>
+
 
 But, what's next??
 Below you can find this awesome freatures in the near future!
@@ -29,7 +29,7 @@ Below you can find this awesome freatures in the near future!
  <li>Confirm Password Input</li>
 </ul>
  
-
+</ul>
 
 ## Technologies
 
