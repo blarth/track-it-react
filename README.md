@@ -2,7 +2,7 @@
 
 An easy habit tracker app, to help you enhance your discipline and achieve your personal goals.
 
-<img src="blarth/track_it_react/src/assets/preview.png" alt="err">
+<img src="https://github.com/blarth/track_it_react/blob/main/src/assets/preview.png" alt="err">
 
 trackit-app-react.vercel.app
 
