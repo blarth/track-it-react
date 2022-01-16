@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import UserContext from "./contexts/UserContext";
 import MainPage from "./MainPage";
 import SignUpPage from "./SignUpPage";

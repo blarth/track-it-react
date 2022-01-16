@@ -1,18 +1,12 @@
 import styled from "styled-components";
 import axios from "axios";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import UserContext from "../../contexts/UserContext";
 import Loader from "react-loader-spinner";
 
-export default function NewHabit({
-  setFormsCount,
-  isSelectedDay,
-  setIsSelectedDay,
-  getHabits
-}) {
+export default function NewHabit({ setFormsCount, getHabits }) {
   const { infoUser } = useContext(UserContext);
   const [isWaiting, setIsWaiting] = useState(false);
-  const [isSelected, setIsSelected] = useState(false);
 
   const daysWeek = [
     { name: "D", id: 0 },
@@ -25,7 +19,7 @@ export default function NewHabit({
   ];
   const [formNewHabit, setFormsNewHabit] = useState({
     name: "",
-    days: []
+    days: [],
   });
   const config = {
     headers: {
@@ -36,9 +30,8 @@ export default function NewHabit({
   function handleNewHabit(event) {
     event.preventDefault();
     setIsWaiting(true);
-    if(formNewHabit.days.length === 0) return
+    if (formNewHabit.days.length === 0) return;
 
-    
     const promise = axios.post(
       "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits",
       formNewHabit,
@@ -56,18 +49,14 @@ export default function NewHabit({
     });
   }
 
- 
   function handleSelectedDay(id) {
-
-    if(formNewHabit.days.includes(id)){
-      const newArray = formNewHabit.days.filter(day => day !== id )
-      setFormsNewHabit({...formNewHabit, days : newArray  })
-      
-    }else{
-      const newArray = [...formNewHabit.days, id]
-      setFormsNewHabit({...formNewHabit, days : newArray  })
+    if (formNewHabit.days.includes(id)) {
+      const newArray = formNewHabit.days.filter((day) => day !== id);
+      setFormsNewHabit({ ...formNewHabit, days: newArray });
+    } else {
+      const newArray = [...formNewHabit.days, id];
+      setFormsNewHabit({ ...formNewHabit, days: newArray });
     }
-    
   }
 
   return (
@@ -90,16 +79,13 @@ export default function NewHabit({
           {daysWeek.map((day, i) => {
             return (
               <ContainerDay
-              key={i}
-              onClick={() => {
-                handleSelectedDay(day.id)
-              }}
-              isSelected={formNewHabit.days.includes(day.id) ? true : false}
+                key={i}
+                onClick={() => {
+                  handleSelectedDay(day.id);
+                }}
+                isSelected={formNewHabit.days.includes(day.id) ? true : false}
               >
-                <p>
-
-                  {day.name}
-                </p>
+                <p>{day.name}</p>
               </ContainerDay>
             );
           })}
@@ -159,6 +145,7 @@ const Form = styled.form`
   width: 100%;
   gap: 6px;
   align-items: center;
+  position: relative;
 `;
 
 const Button = styled.button`
@@ -187,7 +174,6 @@ const Input = styled.input`
   border-radius: 5px;
   background-color: ${(props) => (props.isWaiting ? "#F2F2F2" : "#ffffff")};
   color: #666666;
-;
   font-family: Lexend Deca;
   font-size: 20px;
   text-align: left;
@@ -233,6 +219,10 @@ const ContainerDay = styled.div`
   }
 `;
 const ContainerButtons = styled.div`
+  position: absolute;
+  right: 15px;
+  top: 90px;
+  overflow: hidden;
   display: flex;
   justify-content: flex-end;
   height: 55px;

@@ -12,26 +12,32 @@ export default function Footer() {
       <Link to="/habits">
         <Paragraph>Hábitos</Paragraph>
       </Link>
-      <Link to="/today">
+      
+      <ContentProgressbar>
+
         <Circle>
-          {
+        <Link to="/today">
+          
             <CircularProgressbar
               value={isNaN(habitProgress) ? 0 : habitProgress * 100}
+              
               text={"Hoje"}
               background
-              minValue={0}
+              
               backgroundPadding={6}
               styles={buildStyles({
-                backgroundColor: "#52B6FF",
+                backgroundColor: "#3e98c7",
                 textColor: "#fff",
                 pathColor: "#fff",
                 trailColor: "transparent",
                 textFamily: "Lexend Deca",
               })}
             />
-          }
+          
+          </Link>
         </Circle>
-      </Link>
+      </ContentProgressbar>
+      
       <Link to="/record">
         <Paragraph>Histórico</Paragraph>
       </Link>
@@ -60,9 +66,19 @@ const Paragraph = styled.p`
   font-size: 18px;
   color: #52b6ff;
 `;
+const ContentProgressbar = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+`;
 
 const Circle = styled.div`
-  height: 91px;
-  width: 91px;
-  margin-bottom: 35px;
+  width: 90px;
+  height: 90px;
+
+  position: absolute;
+  top: -40px;
+  
 `;

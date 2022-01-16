@@ -7,7 +7,6 @@ import "dayjs/locale/pt"
 import axios from "axios";
 import UserContext from "../contexts/UserContext";
 import TodayHabit from "./TodayHabit";
-import { number } from "yup";
 
 export default function TodayPage() {
   const { infoUser, habitProgress, setHabitProgress } = useContext(UserContext);
@@ -39,13 +38,14 @@ export default function TodayPage() {
   
   useEffect(() => {
     getTodayHabits()
+    // eslint-disable-line react-hooks/exhaustive-deps
   }, []);
 
   const dia = dayjs().locale("pt").format("dddd, DD/MM").replace("-feira" , "");
 
   useEffect(() => {
     handleHabitProgress()
-  }, [todayHabits])
+  }, [])
 
 
   return (

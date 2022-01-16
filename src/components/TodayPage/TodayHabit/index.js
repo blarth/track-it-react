@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import UserContext from "../../contexts/UserContext";
@@ -12,7 +12,7 @@ export default function TodayHabit({
   highestSequence,
   getTodayHabits,
 }) {
-  const { infoUser, habitProgress } = useContext(UserContext);
+  const { infoUser } = useContext(UserContext);
 
   const config = {
     headers: {

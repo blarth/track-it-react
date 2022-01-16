@@ -21,7 +21,7 @@ export default function HabitsPage() {
 
   useEffect(() => {
     getHabits()
-  }, []);
+  }, [isSelectedDay]);
   function getHabits() {
     const promisse = axios.get(
       "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits",
@@ -36,10 +36,7 @@ export default function HabitsPage() {
 
     promisse.catch((error) => console.log(error.response));
   }
-  function handleNewHabit() {
-    setFormsCount(true);
-    
-  }
+
 
   return (
     <>
@@ -47,7 +44,9 @@ export default function HabitsPage() {
       <Container>
         <ContainerAddHabits>
           <Title>Meus hábitos</Title>
-          <Button onClick={handleNewHabit}>
+          <Button onClick={() => {
+            setFormsCount(true);
+          }}>
             <Plus>+</Plus>
           </Button>
         </ContainerAddHabits>
