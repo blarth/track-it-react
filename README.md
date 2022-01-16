@@ -9,13 +9,9 @@ trackit-app-react.vercel.app
 
 ## Technologies
 
-React
+The following tools and frameworks were used in the construction of the project:
 
-Styled-components
-
-Navigation (Router)
-
-Axios
+ <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="err">
 
 ## Development mode
 In order to run this on dev mode you have to use React environment.
