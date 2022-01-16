@@ -1,11 +1,35 @@
 # TrackIt
 
-## About
+An easy habit tracker app, to help you enhance your discipline and achieve your personal goals.
 
-This project 
-
+<img src="./src/assets/preview.png" alt="err">
 
 trackit-app-react.vercel.app
+
+## About
+
+This is an web application that help you set habits and track them as daily activities in a easy and informative way.
+Below you can find this amazing freatures:
+
+<ul>
+ <li>Sign Up Page</li>
+ <li>Login Page</li>
+ <li>Track your habits Page</li>
+ <li>Today habits Page!</li>
+ <li>Daily progress with circular progress bar!<li/>
+</u>
+
+But, what's next??
+Below you can find this awesome freatures in the near future!
+
+<ul>
+ <li>Login persistence!</li>
+ <li>Better Animations</li>
+ <li>Record Monthly Page</li>
+ <li>Confirm Password Input</li>
+</ul>
+ 
+
 
 ## Technologies
 
